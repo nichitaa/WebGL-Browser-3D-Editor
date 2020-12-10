@@ -1,0 +1,28 @@
+body {
+    font-size: 18px;
+    font-weight: normal;
+    font-family: "Palatino Linotype";
+    background-color: #fff2df;
+}
+
+button {
+    transition-duration: 0.3s;
+    background-color: #bbdefb;
+    color: #000000;
+    font-family: "Palatino Linotype";
+    font-size: 13px;
+    border: 1px solid #1976d2 ;
+}
+
+button:hover {
+    background-color: #e3f2fd;
+    color: black;
+    border: 0.15em solid #0d47a1 ;
+}
+
+body.dark-mode {
+    background-color: #4f5b62;
+    color: #ffffff;
+}
+
+

@@ -1,0 +1,150 @@
+<!--  Pasecinic Nichita   -->
+<!--  FAF-192  -->
+<!--  GC Laboratory Work nr.3-4  -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LAB 4 WebGL Pasecinic Nichita</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="work/css/styles.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+
+<!-- connecting shaders from source shaders folder -->
+<script name="shader" data-src="shaders/vertex.glsl" data-type="vertex" data-version="v1"></script>
+<script name="shader" data-src="shaders/fragment.glsl" data-type="fragment" data-version="v1"></script>
+
+<!-- Library: Signals processing used for dispatching methods -->
+<script type="text/javascript" src="libs/signals.js"></script>
+<script type="text/javascript" src="libs/MV.js"></script>
+<script type="text/javascript" src="libs/glMatrix.js"></script>
+
+<!-- webgl util libs -->
+<script type="text/javascript" src="libs/glUtils.js"></script>
+<script type="text/javascript" src="libs/uiUtils.js"></script>
+
+<!--  main work  -->
+<script type="module" src="work/index.js"></script>
+
+  <canvas id="glcanvas" width="700" height="500" style="border: 3px solid darkslategray; float: left; margin-right: 10px; margin-left: 10px;">
+    Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.
+  </canvas>
+
+  <label>
+    Active Object :
+  </label>
+
+  <select id="dynamic-select">
+    <option value="" selected disabled hidden>Select Active Object</option>
+  </select>
+
+  <button id="SelectObject">Select</button>
+  <button id= "newGradient" style="background-color: #d1f7c6;">Change Gradient</button>
+  <button id="DeleteSelectedObject" style="background-color: #fcdc9d">Delete selected Object</button>
+
+
+  <!--utilities buttons-->
+  <p>Add Objects:
+    <button id= "addCube" >3D Cube</button>
+    <button id= "addPyramid">3D Pyramid</button>
+    <button id= "addCone">3D Cone</button>
+    <button id= "addRomb">3D Rhombus</button>
+    <button id= "solidColorCube">Solid Color Cube</button>
+    <button id= "sphere">Sphere</button>
+    <button id="clearCanvas" style="background-color: #ff7070">Clear canvas</button>
+    <br><br>
+    <input type="file" id="file-input" style="display:block; font-size: 15px; "/>
+  </p>
+<hr>
+
+  <p>Toggle spin direction:
+    <button id= "spinPos" style="font-size: 16px;">↶</button>
+    <button id= "spinNeg" style="font-size: 16px;">↷</button>
+    <button id= "toggleSpin" style="font-size: 16px;">Toggle</button>
+  </p>
+
+  <!-- new clearColor for canvas-->
+  <p>Change canvas color:
+    <button id= "lightgreen">Light Green</button>
+    <button id= "lightblue">Light Blue</button>
+    <button id= "lightgrey">Light Grey</button>
+  </p>
+
+  <!--rotation axis for objects-->
+  <p>Change Rotation Axis:
+    <button id= "xButton">Rotate X</button>
+    <button id= "yButton">Rotate Y</button>
+    <button id= "zButton">Rotate Z</button>
+  </p>
+
+  <!--sliders-->
+  <div style="margin-bottom: 60px;">
+    <!--    translate    -->
+    <div>
+      Down <input id="TranslateY" type="range" min="-1" max="1" step="0.1" value="0.0" />Up
+    </div>
+    <div>
+      Left &nbsp;&nbsp;&nbsp;&nbsp;<input id="TranslateX" type="range" min="-1" max="1" step="0.1" value="0.0" />Right
+    </div>
+    <div>
+      Closer <input id="CloserFurther" type="range" min="1" max="100" step="1" value="1" />Further
+    </div>
+
+    <!--    scale   -->
+    <div>
+      ScaleX <input id="ScaleX" type="range" min="0.1" max="4" step="0.1" value="1.0" />
+    </div>
+    <div>
+      ScaleY <input id="ScaleY" type="range" min="0.1" max="4" step="0.1" value="1.0" />
+    </div>
+    <div>
+      ScaleZ <input id="ScaleZ" type="range" min="0.1" max="4" step="0.1" value="1.0" />
+    </div>
+
+    <!--  up  -->
+    <div>
+      upX:  -2<input id="upX" type="range" min="-2" max="2" step="0.1" value="0.0" />2
+    </div>
+    <div>
+      upY: -2<input id="upY" type="range" min="-2" max="2" step="0.1" value="1.0" />2
+    </div>
+    <div>
+      upZ: -2<input id="upZ" type="range" min="-2" max="2" step="0.1" value="0.0" />2
+    </div>
+    <!-- field of view  -->
+    <div>
+      Field of view &nbsp; &nbsp;10deg<input id="fovySlider" type="range"
+                                             min="10" max="300" step="10" value="45" />
+      300deg
+    </div>
+
+    <!--    aspect    -->
+    <div>
+      Perspective aspect 0.1<input id="aspectSlider" type="range"
+                                   min="0.1" max="10" step="0.2" value="1.4" />
+      10
+    </div>
+  </div>
+
+  <!-- Note: -->
+  <i style="font-size: 15px; margin-left: 10px;"><strong>Note:</strong> use your up, down, left, right key to modify the eye perspective
+    <br>
+      <strong style="margin-left: 10px;">upKey -> Y-</strong>
+    <br>
+      <strong style="margin-left: 10px;">downKey -> Y+</strong>
+    <br>
+      <strong style="margin-left: 10px;">rightKey -> X-</strong>
+    <br>
+      <strong style="margin-left: 10px;">leftKey -> X+</strong>
+  </i>
+
+  <!-- Switch theme-->
+  <p style="margin-left: 10px;">
+    <button id="toggleTheme">Toggle Theme</button>
+  </p>
+
+  </body>
+</html>
+<!--    References : David W Parker   -->
